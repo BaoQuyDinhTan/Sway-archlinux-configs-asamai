@@ -1,0 +1,60 @@
+{
+    "layer": "top",
+    "position": "top",
+    "margin-top": 1,
+    "margin-left": 1,
+    "margin-right": 1,
+    "height": 10,
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": [],
+    "modules-right": ["power-profiles-daemon", "pulseaudio", "network", "battery", "tray", "clock"],
+
+    // Module Configuration
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}"
+    },
+    "clock": {
+        // %a = Day name (Mon), %b = Month (Feb), %d = Day (03)
+        "format": " {:%a, %b %d  %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{:%d %H:%M}</small></tt>"
+    },
+    "pulseaudio": {
+	"format-bluetooth": "{icon} {volume}%",
+        "format-bluetooth-muted": "  Muted",
+        "format": "{icon} {volume}%",
+        "format-muted": " Muted",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "network": {
+        "format-wifi": "  {essid}",
+        "format-ethernet": " Connected",
+        "format-disconnected": "⚠ Disconnected",
+        "tooltip-format": "{ifname}: {ipaddr}",
+	"on-click": "nmtui"
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "power-profiles-daemon": {
+ 	 "format": "{icon}",
+	  "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+	  "tooltip": true,
+	  "format-icons": {
+	    "default": "",
+	    "performance": "Performance ",
+	    "balanced": "Balanced ",
+	    "power-saver": "Power-save "
+    		}
+    }
+}

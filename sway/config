@@ -1,0 +1,207 @@
+# ==============================================================================
+#  Sway Configuration - Organized
+# ==============================================================================
+
+### 1. Variables
+# ---------------------------------------------------------
+set $mod Mod4
+
+# Applications
+set $term kitty
+set $menu rofi -show drun
+
+# Monitors (Change these names if your hardware changes)
+set $laptop eDP-1
+set $external HDMI-A-1
+
+
+### 2. Output Configuration
+# ---------------------------------------------------------
+# Default wallpaper
+output * bg "/mnt/windows/Anh linh tinh/wallpaper.png" fill
+
+# Laptop Screen (Left)
+output $laptop position 0 0
+
+# External Monitor (Right, 120Hz)
+output $external position 1920 0 mode 1920x1080@120Hz
+
+
+### 3. Input Configuration
+# ---------------------------------------------------------
+# Touchpad settings
+input type:touchpad {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+}
+
+# (Optional) Add keyboard layout here if needed
+# input type:keyboard {
+#     xkb_layout "us"
+# }
+
+
+### 4. Workspace Assignments
+# ---------------------------------------------------------
+# Assign 1-5 to External Monitor
+workspace 1 output $external
+workspace 2 output $external
+workspace 3 output $external
+workspace 4 output $external
+workspace 5 output $external
+
+# Assign 6-10 to Laptop Monitor
+workspace 6 output $laptop
+workspace 7 output $laptop
+workspace 8 output $laptop
+workspace 9 output $laptop
+workspace 10 output $laptop
+
+
+### 5. Keybindings
+# ---------------------------------------------------------
+
+# --- Basics ---
+    # Start a terminal
+    bindsym $mod+Return exec $term
+    # Start launcher
+    bindsym $mod+space exec $menu
+    # Kill focused window
+    bindsym $mod+Shift+q kill
+    # Reload configuration
+    bindsym $mod+Shift+c reload
+    # Exit sway
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
+
+# --- Applications & Custom Scripts ---
+    # File Manager (Nautilus)
+    bindsym $mod+e exec nautilus
+    # Clipboard Manager (Cliphist)
+    bindsym $mod+v exec cliphist list | wofi --dmenu | cliphist decode | wl-copy
+    # Display Switch Script
+    bindsym $mod+Shift+p exec ~/.config/sway/switch_display.sh
+    # Lock Screen
+    bindsym $mod+l exec ~/.config/sway/lock.sh
+
+# --- Navigation (Focus) ---
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Cycle windows (Alt+Tab)
+    bindsym Mod1+Tab focus next
+    bindsym Mod1+Shift+Tab focus prev
+
+    # Focus Parent
+    bindsym $mod+a focus parent
+
+# --- Moving Windows ---
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+
+# --- Workspace Switching ---
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+
+    # Cycle workspaces (Super+Tab)
+    bindsym Mod4+Tab workspace next
+    bindsym Mod4+Shift+Tab workspace prev
+
+# --- Moving to Workspaces ---
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+
+# --- Layout & Scratchpad ---
+    # Splits
+    # bindsym $mod+b splith
+    # bindsym $mod+v splitv  <-- Commented out because Mod+V is used for Clipboard
+
+    # Layout styles
+    bindsym $mod+w layout tabbed
+    bindsym $mod+s layout toggle split
+
+    # Floating & Fullscreen
+    bindsym $mod+f fullscreen
+    bindsym $mod+Shift+space floating toggle
+
+    # Scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+    bindsym $mod+minus scratchpad show
+
+    # Mouse interaction (Floating modifier)
+    floating_modifier $mod normal
+
+# --- Resize Mode ---
+mode "resize" {
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# --- Media & System Keys ---
+    # Audio
+    bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    # Brightness
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+    # Screenshot
+    bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
+
+
+### 6. Visuals & Bar
+# ---------------------------------------------------------
+default_border none
+
+bar {
+    swaybar_command waybar
+}
+
+
+### 7. Autostart (Exec)
+# ---------------------------------------------------------
+# Authentication Agent
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# Input Method
+exec_always fcitx5 -d
+
+# Clipboard Manager
+exec wl-paste --watch cliphist store
+
+# Bluetooth Applet
+exec blueman-applet
+
+# Idle Daemon (Lock Screen & Power Management)
+# Ensure the path to lock.sh is correct
+exec swayidle -w \
+    timeout 300 '/home/asamai/.config/sway/lock.sh' \
+    timeout 600 'swaymsg "output * power off"' \
+    resume 'swaymsg "output * power on"' \
+    before-sleep '/home/asamai/.config/sway/lock.sh'

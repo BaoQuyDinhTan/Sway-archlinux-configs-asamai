@@ -1,0 +1,102 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent; /* Makes the bar floating */
+    color: #cdd6f4;
+}
+
+tooltip {
+    background: #1e1e2e;
+    border-radius: 10px;
+    border: 1px solid #cba6f7;
+}
+
+/* 1. Style the container (The pill shape) */
+#workspaces {
+    background-color: #1e1e2e;
+    margin: 0 5px;
+    border-radius: 15px;
+    border: 2px solid #11111b;
+}
+
+/* 2. Style the buttons inside */
+#workspaces button {
+    padding: 0 10px;
+    color: #cdd6f4;
+    border-radius: 15px; /* Make the hover effect rounded too */
+}
+
+/* 3. Style the active/focused workspace */
+#workspaces button.focused {
+    color: #1e1e2e;
+    background-color: #a6e3a1; /* Green highlight for active */
+}
+
+#mode {
+    background: #f38ba8;
+    color: #1e1e2e;
+    border-radius: 10px;
+    padding: 0 10px;
+    margin-right: 10px;
+}
+
+/* The "Pill" Styling for modules */
+#clock, #pulseaudio, #network, #battery, #tray {
+    background-color: #1e1e2e;
+    padding: 0 15px;
+    margin: 0 5px;
+    border-radius: 15px;
+    color: #cdd6f4;
+    border: 2px solid #11111b;
+}
+
+#clock {
+    color: #fab387; /* Peach color for time */
+}
+
+#pulseaudio {
+    color: #89b4fa; /* Blue for audio */
+}
+
+#network {
+    color: #a6e3a1; /* Green for network */
+}
+
+#battery {
+    color: #f38ba8; /* Red/Pink for battery */
+}
+
+#battery.charging {
+    color: #a6e3a1;
+}
+
+#battery.critical {
+    background-color: #f38ba8;
+    color: #1e1e2e;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+    }
+}
+
+#power-profiles-daemon {
+    background-color: #1e1e2e;
+    padding: 0 15px;
+    margin: 0 5px;
+    border-radius: 15px;
+    color: #fab387; /* Peach color */
+    border: 2px solid #11111b;
+}
