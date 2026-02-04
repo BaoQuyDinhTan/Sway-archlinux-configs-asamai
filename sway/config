@@ -208,3 +208,6 @@ exec swayidle -w \
 
 # Mako - notification
 exec mako
+
+# Input remapper
+exec input-remapper-gtk -m
