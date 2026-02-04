@@ -23,8 +23,8 @@
     "pulseaudio": {
 	"format-bluetooth": "{icon} {volume}%",
         "format-bluetooth-muted": "  Muted",
-        "format": "{icon} {volume}%",
-        "format-muted": " Muted",
+        "format": "{icon}  {volume}%",
+        "format-muted": "  Muted",
         "format-icons": {
             "default": ["", "", ""]
         },
@@ -42,7 +42,7 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon} {capacity}%",
+        "format": "{icon}  {capacity}%",
         "format-charging": " {capacity}%",
         "format-icons": ["", "", "", "", ""]
     },
@@ -56,5 +56,10 @@
 	    "balanced": "Balanced ",
 	    "power-saver": "Power-save "
     		}
-    }
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+
 }
