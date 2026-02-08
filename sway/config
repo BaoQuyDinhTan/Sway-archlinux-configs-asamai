@@ -18,8 +18,8 @@ set $external HDMI-A-1
 ### 2. Output Configuration
 # ---------------------------------------------------------
 # Default wallpaper
-output * bg "/mnt/windows/Anh linh tinh/wallpaper.png" fill
-
+#output * bg "/mnt/windows/Anh linh tinh/wallpaper.png" fill
+output * bg "/mnt/windows/Anh linh tinh/HAT0CSQbAAAfF0R.jpeg" fill
 # Laptop Screen (Left)
 output $laptop position 0 0
 
@@ -82,7 +82,7 @@ workspace 10 output $laptop
     # Display Switch Script
     bindsym $mod+Shift+p exec ~/.config/sway/switch_display.sh
     # Lock Screen
-    bindsym $mod+l exec ~/.config/sway/lock.sh
+    bindsym $mod+Shift+l exec ~/.config/sway/lock.sh
 
 # --- Navigation (Focus) ---
     bindsym $mod+Left focus left
@@ -201,8 +201,8 @@ exec blueman-applet
 # Idle Daemon (Lock Screen & Power Management)
 # Ensure the path to lock.sh is correct
 exec swayidle -w \
-    timeout 300 '/home/asamai/.config/sway/lock.sh' \
-    timeout 600 'swaymsg "output * power off"' \
+    #timeout 300 '/home/asamai/.config/sway/lock.sh' \
+    #timeout 600 'swaymsg "output * power off"' \
     resume 'swaymsg "output * power on"' \
     before-sleep '/home/asamai/.config/sway/lock.sh'
 
