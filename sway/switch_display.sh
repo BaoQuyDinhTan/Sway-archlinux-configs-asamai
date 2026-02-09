@@ -26,7 +26,17 @@ case $selected in
         # Enable both to read resolutions
         swaymsg output "$INTERNAL" enable
         swaymsg output "$EXTERNAL" enable
-        sleep 1
+        sleep 0.5
+
+        # Force Workspaces 1-5 to External
+        for i in {1..5}; do
+            swaymsg workspace $i output "$EXTERNAL"
+        done
+
+        # Force Workspaces 6-10 to Laptop (Internal)
+        for i in {6..10}; do
+            swaymsg workspace $i output "$INTERNAL"
+        done
 
         # Get Dimensions
         INT_W=$(swaymsg -t get_outputs | jq -r '.[] | select(.name=="'$INTERNAL'") | .rect.width')
