@@ -175,6 +175,11 @@ bindsym $mod+r mode "resize"
     bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
 
 
+# --- Nightlight controls ---
+bindsym $mod+Shift+n exec ~/.config/sway/nightlight.sh increase
+bindsym $mod+Shift+m exec ~/.config/sway/nightlight.sh reset
+
+
 ### 6. Visuals & Bar
 # ---------------------------------------------------------
 default_border none
