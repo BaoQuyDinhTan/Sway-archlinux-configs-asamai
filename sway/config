@@ -19,7 +19,7 @@ set $external HDMI-A-1
 # ---------------------------------------------------------
 # Default wallpaper
 #output * bg "/mnt/windows/Anh linh tinh/wallpaper.png" fill
-output * bg "/mnt/windows/Anh linh tinh/HAT0CSQbAAAfF0R.jpeg" fill
+output * bg "/mnt/windows/Anh linh tinh/Shorekeeper FRover Ocean @void_ling.jpg" fill
 # Laptop Screen (Left)
 output $laptop position 0 0
 
@@ -66,7 +66,7 @@ workspace 10 output $laptop
     # Start a terminal
     bindsym $mod+Return exec $term
     # Start launcher
-    bindsym $mod+space exec $menu
+    bindsym $mod+space exec $menu -show drun -show-icons
     # Kill focused window
     bindsym $mod+Shift+q kill
     # Reload configuration

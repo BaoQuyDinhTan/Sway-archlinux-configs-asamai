@@ -9,8 +9,8 @@ if [ -z "$EXTERNAL" ]; then
     exit 1
 fi
 
-# 2. Main Menu
-options="Laptop Only\nExternal Only\nBoth (Extend)"
+# 2. Main Menu - Added "Duplicate (Mirror)"
+options="Laptop Only\nExternal Only\nBoth (Extend)\nDuplicate (Mirror)"
 selected=$(echo -e "$options" | rofi -dmenu -i -p "Display Mode")
 
 case $selected in
@@ -21,6 +21,16 @@ case $selected in
     "External Only")
         swaymsg output "$INTERNAL" disable
         swaymsg output "$EXTERNAL" enable
+        ;;
+    "Duplicate (Mirror)")
+        # Enable both displays
+        swaymsg output "$INTERNAL" enable
+        swaymsg output "$EXTERNAL" enable
+        sleep 0.5
+        
+        # Mirroring in Sway is achieved by stacking them at the exact same coordinates
+        swaymsg output "$INTERNAL" pos 0 0
+        swaymsg output "$EXTERNAL" pos 0 0
         ;;
     "Both (Extend)")
         # Enable both to read resolutions
